@@ -9,10 +9,15 @@ import { RootState } from '../states/store';
 export const SalesGraph = () => {
     const dispatch = useDispatch();
     const apiData = useSelector((state: RootState) => state.api.data);
-
+    const timeData = apiData?.[0].sales.map(x => {
+        let date = new Date(x.weekEnding)
+        date.setTime(date.getTime() + (8 * 60 * 60 * 1000));
+        return date;
+    } );
     React.useEffect(() => {
         dispatch(fetchApiData() as any);
     }, [dispatch]);
+      
 
     return (
         <Paper sx={{ width: '98%', bgcolor: 'background.paper' }}> 
@@ -20,10 +25,11 @@ export const SalesGraph = () => {
                 Retail Sales
             </Typography>
             <LineChart
+            xAxis={[{ data: timeData || [], scaleType: 'time', }]}
             series={[
                 {
                 dataKey: 'retailSales',
-                showMark: false,
+                showMark: false, 
                 color: 'lightblue',
                 },
             ]}
