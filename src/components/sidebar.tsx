@@ -19,8 +19,10 @@ export const SideBar = () => {
                 <Typography component="div" sx={{ flexGrow: 0 }} align="center">
                     <img src={apiData?.[0].image} alt="" style={{height:'auto', width: '50%', marginTop: 30, marginBottom: 30}}/>
                 </Typography>
-                <Typography>{apiData?.[0].title}</Typography>
-                <Typography variant="caption" style={{ color: 'grey'}} align="center">{apiData?.[0].subtitle}</Typography>
+                <Box style={{ marginLeft: 25, marginRight: 25 }}>
+                    <Typography>{apiData?.[0].title}</Typography>
+                    <Typography variant="caption" style={{ color: 'grey'}} align="center">{apiData?.[0].subtitle}</Typography>
+                </Box>
                 <Divider style={{marginTop: 20, marginBottom: 10}}/>
                 {
                     apiData?.[0].tags.map(tag => {
